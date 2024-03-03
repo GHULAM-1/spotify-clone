@@ -19,7 +19,9 @@ function formatTime(seconds) {
 async function getSongs(folder) {
   try {
     currFolder = folder;
-    let response = await fetch(`http://127.0.0.1:5501/${folder}/`);
+    let response = await fetch(
+      `https://spotify-clone-xi-three.vercel.app/${folder}/`
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -82,7 +84,9 @@ function palyMusic(audio, pause = false) {
 }
 
 async function albumsDisplay() {
-  let response = await fetch("http://127.0.0.1:5501/songs/");
+  let response = await fetch(
+    "https://spotify-clone-xi-three.vercel.app/songs/"
+  );
   let html = await response.text();
   let div = document.createElement("div");
   div.innerHTML = html;
@@ -94,7 +98,7 @@ async function albumsDisplay() {
     if (e.href.includes("/songs/")) {
       let folderName = e.href.split("/").slice(-1)[0];
       let data = await fetch(
-        `http://127.0.0.1:5501/songs/${folderName}/info.json`
+        `https://spotify-clone-xi-three.vercel.app/songs/${folderName}/info.json`
       );
       let jason = await data.json();
       console.log(jason);
